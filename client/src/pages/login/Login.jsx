@@ -23,7 +23,7 @@ const Login = () => {
     dispatch({ type: "LOGIN_START" });
     try {
       const res = await axios.post("/auth/login", credentials);
-      dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
       navigate("/")
     } catch (err) {
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
@@ -32,28 +32,36 @@ const Login = () => {
 
 
   return (
-    <div className="login">
-      <div className="lContainer">
-        <input
-          type="text"
-          placeholder="username"
-          id="username"
-          onChange={handleChange}
-          className="lInput"
-        />
-        <input
-          type="password"
-          placeholder="password"
-          id="password"
-          onChange={handleChange}
-          className="lInput"
-        />
-        <button disabled={loading} onClick={handleClick} className="lButton">
-          Login
-        </button>
-        {error && <span>{error.message}</span>}
+    <div className="bodylogin">
+      
+      <div className="mainlogin">  	
+         <input className="inputl" type="checkbox" id="chk" aria-hidden="true"></input>
+         <div className="signup">
+		         <label className="lb"  aria-hidden="true">Sign up</label>
+		         <input className="inputl" type="text"  placeholder="username" id="username"
+               onChange={handleChange} required=""></input>
+		         <input className="inputl" type="email" placeholder="Email" id="email"
+                onChange={handleChange} required=""></input>
+		         <input className="inputl" type="password"  placeholder="Password" id="password"
+                onChange={handleChange} required=""></input>
+		         <button className="buttonl">Sign up</button>
+         </div>
+
+	     <div className="login">
+	  	  <div className="lcontainer">
+        <label className="lbl" for="chk" aria-hidden="true">Login</label>
+		     <input className="inputl" type="text"  placeholder="username" id="username"
+          onChange={handleChange} required=""></input>
+		     <input className="inputl" type="password" placeholder="password" id="password"
+          onChange={handleChange} required=""></input>
+		     <button  disabled={loading} onClick={handleClick} className="lButton buttonl">Login</button>
+		     {error && <span>{error.message}</span> }
+        </div>
+	     </div>
       </div>
+     
     </div>
+    
   );
 };
 
